@@ -60,7 +60,10 @@ const routes: IRouter[] = [
             {
                 path: '/book',
                 name: 'Book',
-                component: CenterView,
+                components: {
+                    default: Book,
+                    center: CenterView,
+                },
                 meta: {
                     title: '书籍',
                     hideInMenu: false,

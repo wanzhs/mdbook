@@ -19,7 +19,8 @@
                     </Breadcrumb>
                     <Card style="height: 90%;">
                         <keep-alive :include="cacheList">
-                            <router-view/>
+                            <router-view v-if="this.$route.matched.length<3"/>
+                            <router-view v-else name="center"/>
                         </keep-alive>
                     </Card>
                 </Content>
