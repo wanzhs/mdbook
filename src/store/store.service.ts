@@ -53,3 +53,20 @@ export const getRoutePathByName = (list: IRouter[], name: string) => {
     });
     return path;
 };
+
+export const getCacheList = (list: IRouter[]) => {
+    let res: string[] = [];
+    list.forEach(item => {
+        if (!item.meta || !item.meta.notCache) {
+            res.push(item.name);
+        }
+        if (item.children && item.children.length > 0) {
+            let sub_res = getCacheList(item.children);
+            if (sub_res && sub_res.length > 0) {
+                sub_res.push(item.name);
+                res = sub_res;
+            }
+        }
+    });
+    return res;
+};

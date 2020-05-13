@@ -6,15 +6,16 @@ import ViewUI from 'view-design'
 // import 'view-design/dist/styles/iview.css'
 import './assets/css/iview.less'
 import StoreMenuConstant from "@/store/menu.constant";
-import {getBreadCrumbListByName, getMenuByRouter} from "@/store/store.service";
+import {getBreadCrumbListByName, getCacheList, getMenuByRouter} from "@/store/store.service";
 import {homeName} from "@/config/config.constant";
 
 Vue.use(ViewUI);
 Vue.config.productionTip = false;
 
-//初始化保存菜单和首页
+//初始化保存菜单和首页以及缓存视图列表
 store.commit(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.mutation().SetMenuList}`, getMenuByRouter(routes));
 store.commit(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.mutation().SetBreadCrumbList}`, getBreadCrumbListByName(routes, homeName));
+store.commit(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.mutation().SetCacheList}`, getCacheList(routes));
 new Vue({
     router,
     store,

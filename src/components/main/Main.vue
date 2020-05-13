@@ -18,7 +18,7 @@
                         <BreadcrumbItem v-for="item in breadCrumbList">{{item}}</BreadcrumbItem>
                     </Breadcrumb>
                     <Card style="height: 90%;" id="sub_app">
-                        <keep-alive>
+                        <keep-alive :include="cacheList">
                             <router-view/>
                         </keep-alive>
                     </Card>
@@ -49,6 +49,8 @@
         public menuList!: IMenuInfo[];
         @Getter(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.getter().GetBreadCrumbList}`)
         public breadCrumbList!: string[];
+        @Getter(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.getter().GetCacheList}`)
+        public cacheList!: string[];
         @Mutation(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.mutation().SetBreadCrumbList}`)
         public setBreadCrumbs!: (crumbList: any) => void;
 

@@ -7,6 +7,9 @@ import {IRouter} from "@/router/router";
 import {homeName} from "@/config/config.constant";
 import Book from "@/views/Book.vue";
 import Data from "@/views/Data.vue";
+import Peace from "@/views/Peace.vue";
+import Love from "@/views/Love.vue";
+import Joy from "@/views/Joy.vue";
 
 Vue.use(VueRouter);
 
@@ -29,7 +32,7 @@ const routes: IRouter[] = [
                     hideInMenu: true,
                     hideInBread: true,
                 },
-                component: Home
+                component: Home,
             }
         ]
     },
@@ -61,7 +64,36 @@ const routes: IRouter[] = [
                     title: '书籍',
                     hideInMenu: false,
                     icon: 'ios-book',
-                }
+                },
+                children: [
+                    {
+                        path: '/peace',
+                        name: 'peace',
+                        component: Peace,
+                        meta: {
+                            title: '和平',
+                            hideInMenu: false,
+                        }
+                    },
+                    {
+                        path: '/love',
+                        name: 'love',
+                        component: Love,
+                        meta: {
+                            title: '仁爱',
+                            hideInMenu: false,
+                        }
+                    },
+                    {
+                        path: '/joy',
+                        name: 'joy',
+                        component: Joy,
+                        meta: {
+                            title: '喜乐',
+                            hideInMenu: false,
+                        }
+                    }
+                ]
             }, {
                 path: '/data',
                 name: 'Data',

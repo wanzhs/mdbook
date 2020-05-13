@@ -10,6 +10,9 @@ const mutations: MutationTree<IAPPState> = {
     },
     [StoreMenuConstant.mutation().SetMenuList](state: IAPPState, payload: any) {
         state.menuList = payload;
+    },
+    [StoreMenuConstant.mutation().SetCacheList](state: IAPPState, payload: any) {
+        state.cacheList = payload;
     }
 };
 const getters: GetterTree<IAPPState, IState> = {
@@ -22,7 +25,10 @@ const getters: GetterTree<IAPPState, IState> = {
     },
     [StoreMenuConstant.getter().GetBreadCrumbList](state, getters1, rootState, rootGetters) {
         return state.breadCrumbList;
-    }
+    },
+    [StoreMenuConstant.getter().GetCacheList](state, getters1, rootState, rootGetters) {
+        return state.cacheList;
+    },
 };
 
 const AppModule: Module<IAPPState, IState> = {
@@ -31,6 +37,7 @@ const AppModule: Module<IAPPState, IState> = {
     state: {
         breadCrumbList: [],
         menuList: [],
+        cacheList: [],
     },
     namespaced: true,
 };

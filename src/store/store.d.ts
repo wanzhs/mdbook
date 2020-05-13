@@ -7,4 +7,5 @@ export interface IState {
 export interface IAPPState {
     menuList?: any[];
     breadCrumbList?: any;
+    cacheList?: any[];
 }

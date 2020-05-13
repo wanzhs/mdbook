@@ -9,6 +9,7 @@ export interface IRouter extends RouteConfig {
 export interface IMetaData {
     title?: string;
     icon?: string;
+    notCache?: boolean;
     hideInMenu?: boolean;
     hideInBread?: boolean;
 }
