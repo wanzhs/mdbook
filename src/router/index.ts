@@ -10,6 +10,7 @@ import Data from "@/views/Data.vue";
 import Peace from "@/views/Peace.vue";
 import Love from "@/views/Love.vue";
 import Joy from "@/views/Joy.vue";
+import CenterView from "@/components/main/CenterView.vue";
 
 Vue.use(VueRouter);
 
@@ -59,7 +60,7 @@ const routes: IRouter[] = [
             {
                 path: '/book',
                 name: 'Book',
-                component: Book,
+                component: CenterView,
                 meta: {
                     title: '书籍',
                     hideInMenu: false,
@@ -73,6 +74,7 @@ const routes: IRouter[] = [
                         meta: {
                             title: '和平',
                             hideInMenu: false,
+                            notCache: true,
                         }
                     },
                     {
@@ -82,6 +84,7 @@ const routes: IRouter[] = [
                         meta: {
                             title: '仁爱',
                             hideInMenu: false,
+                            notCache: true,
                         }
                     },
                     {
@@ -91,6 +94,7 @@ const routes: IRouter[] = [
                         meta: {
                             title: '喜乐',
                             hideInMenu: false,
+                            notCache: true,
                         }
                     }
                 ]

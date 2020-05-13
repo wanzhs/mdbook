@@ -17,7 +17,7 @@
                     <Breadcrumb :style="{margin: '16px 0'}" align="left">
                         <BreadcrumbItem v-for="item in breadCrumbList">{{item}}</BreadcrumbItem>
                     </Breadcrumb>
-                    <Card style="height: 90%;" id="sub_app">
+                    <Card style="height: 90%;">
                         <keep-alive :include="cacheList">
                             <router-view/>
                         </keep-alive>
@@ -39,9 +39,10 @@
     import SideMenu from "@/components/menu/SideMenu.vue";
     import {getBreadCrumbListByName, getRoutePathByName} from "@/store/store.service";
     import {routes} from "@/router";
+    import CenterView from "@/components/main/CenterView.vue";
 
     @Component({
-        components: {SideMenu}
+        components: {ParentView: CenterView, SideMenu}
     })
     export default class Main extends Mixins(MenuMixin) {
         public collapsed: boolean = false;
@@ -61,7 +62,7 @@
 
         handleSubMenuClick(names: string[]) {
             if (names && names.length > 0) {
-                this.handleMenuItemClick(names[0]);
+                this.handleMenuItemClick(names[names.length - 1]);
             }
         }
 
