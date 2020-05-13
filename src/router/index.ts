@@ -7,10 +7,10 @@ import {IRouter} from "@/router/router";
 import {homeName} from "@/config/config.constant";
 import Book from "@/views/Book.vue";
 import Data from "@/views/Data.vue";
-import Peace from "@/views/Peace.vue";
 import Love from "@/views/Love.vue";
 import Joy from "@/views/Joy.vue";
 import CenterView from "@/components/main/CenterView.vue";
+import Peace from "@/views/Peace.vue";
 
 Vue.use(VueRouter);
 
@@ -73,12 +73,37 @@ const routes: IRouter[] = [
                     {
                         path: '/peace',
                         name: 'peace',
-                        component: Peace,
+                        components: {
+                            default: Peace,
+                            center: CenterView,
+                        },
                         meta: {
                             title: '和平',
                             hideInMenu: false,
                             notCache: true,
-                        }
+                        },
+                        children: [
+                            {
+                                path: '/kind',
+                                name: 'kind',
+                                component: Data,
+                                meta: {
+                                    title: "慈爱",
+                                    hideInMenu: false,
+                                    notCache: true
+                                }
+                            },
+                            {
+                                path: '/rejoice',
+                                name: 'rejoice',
+                                component: Data,
+                                meta: {
+                                    title: "愉悦",
+                                    hideInMenu: false,
+                                    notCache: true
+                                }
+                            }
+                        ]
                     },
                     {
                         path: '/love',

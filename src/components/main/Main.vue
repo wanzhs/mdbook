@@ -19,7 +19,7 @@
                     </Breadcrumb>
                     <Card style="height: 90%;">
                         <keep-alive :include="cacheList">
-                            <router-view v-if="this.$route.matched.length<3"/>
+                            <router-view v-if="depth<3"/>
                             <router-view v-else name="center"/>
                         </keep-alive>
                     </Card>
@@ -38,7 +38,7 @@
     import StoreMenuConstant from "@/store/menu.constant";
     import {IMenuInfo} from "@/components/menu/menu";
     import SideMenu from "@/components/menu/SideMenu.vue";
-    import {getBreadCrumbListByName, getRoutePathByName} from "@/store/store.service";
+    import {getBreadCrumbListByName, getRouteDepthByName, getRoutePathByName} from "@/store/store.service";
     import {routes} from "@/router";
     import CenterView from "@/components/main/CenterView.vue";
 
@@ -55,6 +55,7 @@
         public cacheList!: string[];
         @Mutation(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.mutation().SetBreadCrumbList}`)
         public setBreadCrumbs!: (crumbList: any) => void;
+        public depth: number = 1;
 
         public collapsedSider() {
             //@ts-ignore
@@ -70,9 +71,11 @@
         handleMenuItemClick(name: string) {
             const crumb = getBreadCrumbListByName(routes, name);
             const routePath = getRoutePathByName(routes, name);
+            this.depth = getRouteDepthByName(routes, name);
             if (crumb && crumb.length > 0) {
                 this.setBreadCrumbs(crumb.reverse());
             }
+            console.log(this.depth)
             if (routePath !== this.$route.path) {
                 this.$router.push({name: name});
             }
