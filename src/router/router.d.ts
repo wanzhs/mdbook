@@ -10,5 +10,5 @@ export interface IMetaData {
     title?: string;
     icon?: string;
     hideInMenu?: boolean;
-    component?: any;
+    hideInBread?: boolean;
 }

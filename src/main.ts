@@ -14,7 +14,7 @@ Vue.config.productionTip = false;
 
 //初始化保存菜单和首页
 store.commit(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.mutation().SetMenuList}`, getMenuByRouter(routes));
-
+store.commit(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.mutation().SetBreadCrumbList}`, getBreadCrumbListByName(routes, homeName));
 new Vue({
     router,
     store,

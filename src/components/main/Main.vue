@@ -17,8 +17,10 @@
                     <Breadcrumb :style="{margin: '16px 0'}" align="left">
                         <BreadcrumbItem v-for="item in breadCrumbList">{{item}}</BreadcrumbItem>
                     </Breadcrumb>
-                    <Card style="height: 90%;">
-                        <router-view/>
+                    <Card style="height: 90%;" id="sub_app">
+                        <keep-alive>
+                            <router-view/>
+                        </keep-alive>
                     </Card>
                 </Content>
             </Layout>
@@ -35,7 +37,7 @@
     import StoreMenuConstant from "@/store/menu.constant";
     import {IMenuInfo} from "@/components/menu/menu";
     import SideMenu from "@/components/menu/SideMenu.vue";
-    import {getBreadCrumbListByName} from "@/store/store.service";
+    import {getBreadCrumbListByName, getRoutePathByName} from "@/store/store.service";
     import {routes} from "@/router";
 
     @Component({
@@ -57,16 +59,20 @@
 
         handleSubMenuClick(names: string[]) {
             if (names && names.length > 0) {
-                const crumb = getBreadCrumbListByName(routes, names[0]);
-                this.setBreadCrumbs(crumb.reverse());
+                this.handleMenuItemClick(names[0]);
             }
         }
 
         handleMenuItemClick(name: string) {
             const crumb = getBreadCrumbListByName(routes, name);
-            this.setBreadCrumbs(crumb.reverse());
+            const routePath = getRoutePathByName(routes, name);
+            if (crumb && crumb.length > 0) {
+                this.setBreadCrumbs(crumb.reverse());
+            }
+            if (routePath !== this.$route.path) {
+                this.$router.push({name: name});
+            }
         }
-
     }
 </script>
 
