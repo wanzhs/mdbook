@@ -1,12 +1,10 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+   <HelloWorld msg="你好，helloworld"/>
   </div>
 </template>
 
 <script lang="ts">
-// @ is an alias to /src
 import {Component, Vue} from "vue-property-decorator";
 import HelloWorld from "@/components/HelloWorld.vue";
 

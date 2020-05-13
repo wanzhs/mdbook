@@ -1,13 +1,19 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import router, {routes} from './router'
 import store from './store'
 import ViewUI from 'view-design'
 // import 'view-design/dist/styles/iview.css'
 import './assets/css/iview.less'
+import StoreMenuConstant from "@/store/menu.constant";
+import {getBreadCrumbListByName, getMenuByRouter} from "@/store/store.service";
+import {homeName} from "@/config/config.constant";
 
 Vue.use(ViewUI);
 Vue.config.productionTip = false;
+
+//初始化保存菜单和首页
+store.commit(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.mutation().SetMenuList}`, getMenuByRouter(routes));
 
 new Vue({
     router,
