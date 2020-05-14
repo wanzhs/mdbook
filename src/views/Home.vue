@@ -1,30 +1,18 @@
 <template>
-    <div type="flex" style="height: 100%">
-        <mavon-editor v-model="markdown"
-                      :subfield="true"
-                      :toolbarsFlag="true"
-                      :editable="true"
-                      :scrollStyle="true"
-                      :ishljs="true"
-        />
-    </div>
+    <Markdown :file-name="filename"/>
 </template>
 
 <script lang="ts">
+
+
     import {Component, Vue} from "vue-property-decorator";
-    import HelloWorld from "@/components/HelloWorld.vue";
-    import MyMarkDown from '@/md/cpu.md'
-    import showdown from 'showdown'
+    import Markdown from "@/components/main/Markdown.vue";
 
-    @Component({components: {HelloWorld}})
+    @Component({
+        components: {Markdown}
+    })
     export default class Home extends Vue {
-        public html: string = "";
-        public markdown: string = "";
-
-        mounted() {
-            let converter = new showdown.Converter();
-            this.html = MyMarkDown.toString();
-            this.markdown = converter.makeMarkdown(this.html);
-        }
+        public filename: string = "@/md/cpu.md";
     }
 </script>
+
