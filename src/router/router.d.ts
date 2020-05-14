@@ -1,6 +1,7 @@
 import {RouteConfig} from "vue-router";
 
 export interface IRouter extends RouteConfig {
+    path: string;
     name: string;
     meta?: IMetaData;
     children?: IRouter[];

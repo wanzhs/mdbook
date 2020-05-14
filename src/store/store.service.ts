@@ -70,19 +70,3 @@ export const getCacheList = (list: IRouter[]) => {
     });
     return res;
 };
-
-export const getRouteDepthByName = (list: IRouter[], name: string) => {
-    let depth: number = 0;
-    list.forEach(item => {
-        if (item.name === name) {
-            depth = 1;
-        }
-        if (item.children && item.children.length > 0) {
-            const route_path: number = getRouteDepthByName(item.children, name)
-            if (route_path > 0) {
-                depth = route_path + 1;
-            }
-        }
-    });
-    return depth;
-};

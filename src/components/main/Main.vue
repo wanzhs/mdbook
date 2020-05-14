@@ -19,8 +19,7 @@
                     </Breadcrumb>
                     <Card style="height: 90%;">
                         <keep-alive :include="cacheList">
-                            <router-view v-if="depth<3"/>
-                            <router-view v-else name="center"/>
+                            <router-view/>
                         </keep-alive>
                     </Card>
                 </Content>
@@ -38,12 +37,11 @@
     import StoreMenuConstant from "@/store/menu.constant";
     import {IMenuInfo} from "@/components/menu/menu";
     import SideMenu from "@/components/menu/SideMenu.vue";
-    import {getBreadCrumbListByName, getRouteDepthByName, getRoutePathByName} from "@/store/store.service";
+    import {getBreadCrumbListByName, getRoutePathByName} from "@/store/store.service";
     import {routes} from "@/router";
-    import CenterView from "@/components/main/CenterView.vue";
 
     @Component({
-        components: {ParentView: CenterView, SideMenu}
+        components: {SideMenu}
     })
     export default class Main extends Mixins(MenuMixin) {
         public collapsed: boolean = false;
@@ -71,11 +69,9 @@
         handleMenuItemClick(name: string) {
             const crumb = getBreadCrumbListByName(routes, name);
             const routePath = getRoutePathByName(routes, name);
-            this.depth = getRouteDepthByName(routes, name);
             if (crumb && crumb.length > 0) {
                 this.setBreadCrumbs(crumb.reverse());
             }
-            console.log(this.depth)
             if (routePath !== this.$route.path) {
                 this.$router.push({name: name});
             }

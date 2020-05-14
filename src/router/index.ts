@@ -9,7 +9,6 @@ import Book from "@/views/Book.vue";
 import Data from "@/views/Data.vue";
 import Love from "@/views/Love.vue";
 import Joy from "@/views/Joy.vue";
-import CenterView from "@/components/main/CenterView.vue";
 import Peace from "@/views/Peace.vue";
 
 Vue.use(VueRouter);
@@ -27,7 +26,7 @@ const routes: IRouter[] = [
         },
         children: [
             {
-                path: '/home',
+                path: 'home',
                 name: homeName,
                 meta: {
                     hideInMenu: true,
@@ -40,7 +39,7 @@ const routes: IRouter[] = [
     {
         path: '/_about',
         name: '_about',
-        redirect: '/about',
+        redirect: '/_about/about',
         component: MainComponent,
         meta: {
             title: '关于',
@@ -49,7 +48,7 @@ const routes: IRouter[] = [
         },
         children: [
             {
-                path: '/about',
+                path: 'about',
                 name: 'About',
                 component: About,
                 meta: {
@@ -58,12 +57,9 @@ const routes: IRouter[] = [
                 }
             },
             {
-                path: '/book',
+                path: 'book',
                 name: 'Book',
-                components: {
-                    default: Book,
-                    center: CenterView,
-                },
+                component: Book,
                 meta: {
                     title: '书籍',
                     hideInMenu: false,
@@ -71,12 +67,9 @@ const routes: IRouter[] = [
                 },
                 children: [
                     {
-                        path: '/peace',
+                        path: 'peace',
                         name: 'peace',
-                        components: {
-                            default: Peace,
-                            center: CenterView,
-                        },
+                        component: Peace,
                         meta: {
                             title: '和平',
                             hideInMenu: false,
@@ -84,7 +77,7 @@ const routes: IRouter[] = [
                         },
                         children: [
                             {
-                                path: '/kind',
+                                path: 'kind',
                                 name: 'kind',
                                 component: Data,
                                 meta: {
@@ -94,19 +87,31 @@ const routes: IRouter[] = [
                                 }
                             },
                             {
-                                path: '/rejoice',
+                                path: 'rejoice',
                                 name: 'rejoice',
-                                component: Data,
+                                component: Home,
                                 meta: {
                                     title: "愉悦",
                                     hideInMenu: false,
                                     notCache: true
-                                }
+                                },
+                                children: [
+                                    {
+                                        path: 'goodness',
+                                        name: 'goodness',
+                                        component: Book,
+                                        meta: {
+                                            title: "良善",
+                                            hideInMenu: false,
+                                            notCache: false,
+                                        }
+                                    }
+                                ]
                             }
                         ]
                     },
                     {
-                        path: '/love',
+                        path: 'love',
                         name: 'love',
                         component: Love,
                         meta: {
@@ -116,7 +121,7 @@ const routes: IRouter[] = [
                         }
                     },
                     {
-                        path: '/joy',
+                        path: 'joy',
                         name: 'joy',
                         component: Joy,
                         meta: {
@@ -127,7 +132,7 @@ const routes: IRouter[] = [
                     }
                 ]
             }, {
-                path: '/data',
+                path: 'data',
                 name: 'Data',
                 component: Data,
                 meta: {
@@ -142,6 +147,13 @@ const routes: IRouter[] = [
 
 const router = new VueRouter({
     routes
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.length > 2) {
+        to.matched.splice(1, to.matched.length - 2);
+    }
+    next();
 });
 
 export {routes};
