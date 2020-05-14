@@ -7,6 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "hyperdown": "^2.4.4",
+    "showdown": "^1.9.1",
     "view-design": "^4.2.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
@@ -23,6 +25,7 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "typescript": "~3.8.3",
+    "vue-markdown-loader": "^2.4.1",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [
