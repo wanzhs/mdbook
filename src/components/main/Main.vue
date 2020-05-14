@@ -17,11 +17,11 @@
                     <Breadcrumb :style="{margin: '16px 0'}" align="left">
                         <BreadcrumbItem v-for="item in breadCrumbList">{{item}}</BreadcrumbItem>
                     </Breadcrumb>
-                    <Card style="height: 90%;">
+                    <div style="height: 90%;">
                         <keep-alive :include="cacheList">
                             <router-view/>
                         </keep-alive>
-                    </Card>
+                    </div>
                 </Content>
             </Layout>
         </Layout>

@@ -3,12 +3,15 @@ import App from './App.vue'
 import router, {routes} from './router'
 import store from './store'
 import ViewUI from 'view-design'
+import mavonEditor from 'mavon-editor'
 // import 'view-design/dist/styles/iview.css'
 import './assets/css/iview.less'
 import StoreMenuConstant from "@/store/menu.constant";
 import {getBreadCrumbListByName, getCacheList, getMenuByRouter} from "@/store/store.service";
 import {homeName} from "@/config/config.constant";
 
+
+Vue.use(mavonEditor);
 Vue.use(ViewUI);
 Vue.config.productionTip = false;
 

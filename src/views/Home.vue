@@ -1,24 +1,30 @@
 <template>
-    <div class="home">
-        <!--   <HelloWorld msg="你好，helloworld"/>-->
-        <div v-html="html"></div>
+    <div type="flex" style="height: 100%">
+        <mavon-editor v-model="markdown"
+                      :subfield="true"
+                      :toolbarsFlag="true"
+                      :editable="true"
+                      :scrollStyle="true"
+                      :ishljs="true"
+        />
     </div>
 </template>
 
 <script lang="ts">
     import {Component, Vue} from "vue-property-decorator";
     import HelloWorld from "@/components/HelloWorld.vue";
-    import myMarkDown from '@/md/cpu.md'
+    import MyMarkDown from '@/md/cpu.md'
     import showdown from 'showdown'
 
     @Component({components: {HelloWorld}})
     export default class Home extends Vue {
         public html: string = "";
+        public markdown: string = "";
 
         mounted() {
             let converter = new showdown.Converter();
-            let text: string = myMarkDown.toString();
-            this.html = converter.makeHtml(text);
+            this.html = MyMarkDown.toString();
+            this.markdown = converter.makeMarkdown(this.html);
         }
     }
 </script>
