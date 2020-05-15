@@ -1,7 +1,7 @@
 <template>
     <div class="layout">
         <Layout :style="{minHeight: '100vh'}">
-            <Sider ref="side2" collapsible hide-trigger :width="256" :collapsed-width="64" v-model="collapsed">
+            <Sider ref="side2" collapsible hide-trigger breakpoint="sm" :width="256" :collapsed-width="0" v-model="collapsed">
                 <Scroll :height="scrollHeight">
                     <mavon-editor v-html="html"/>
                 </Scroll>
@@ -11,7 +11,7 @@
                     <Icon @click.native="collapsedSider" :style="{margin: '0 -40px'}"
                           type="md-menu" size="24"></Icon>
                 </Header>
-                <Content :style="{padding: '0 16px 16px'}">
+                <Content :style="{paddingTop: '8px'}">
                     <div style="height: 90%;">
                         <keep-alive :include="cacheList">
                             <router-view/>

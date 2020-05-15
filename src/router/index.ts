@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import About from "@/views/About.vue";
 import MainComponent from '@/components/main/Main.vue'
 import {IRouter} from "@/router/router";
-import {homeName, markdownRoute} from "@/config/config.constant";
+import {homeName} from "@/config/config.constant";
 import Book from "@/views/Book.vue";
 import Data from "@/views/Data.vue";
 import Love from "@/views/Love.vue";
