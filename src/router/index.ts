@@ -4,20 +4,21 @@ import Home from '../views/Home.vue'
 import About from "@/views/About.vue";
 import MainComponent from '@/components/main/Main.vue'
 import {IRouter} from "@/router/router";
-import {homeName} from "@/config/config.constant";
+import {homeName, markdownRoute} from "@/config/config.constant";
 import Book from "@/views/Book.vue";
 import Data from "@/views/Data.vue";
 import Love from "@/views/Love.vue";
 import Joy from "@/views/Joy.vue";
 import Peace from "@/views/Peace.vue";
-import {getSummaryMenu} from "@/store/store.service";
+import EditorMain from "@/components/main/EditorMain.vue";
+import EditorHome from "@/views/EditorHome.vue";
 
 Vue.use(VueRouter);
 
-let routes: IRouter[] = [
+const routes: IRouter[] = [
     {
         path: '/',
-        redirect: '/home',
+        redirect: '/markdown',
         name: '_home',
         component: MainComponent,
         meta: {
@@ -34,6 +35,22 @@ let routes: IRouter[] = [
                     hideInBread: true,
                 },
                 component: Home,
+            }
+        ]
+    },
+    {
+        path: '/markdown',
+        name: 'markdown',
+        component: EditorMain,
+        meta: {
+            title: '富文本编辑器',
+            hideInMenu: true,
+        },
+        children: [
+            {
+                path: '*',
+                name: 'markdown-children',
+                component: EditorHome,
             }
         ]
     },
@@ -145,10 +162,7 @@ let routes: IRouter[] = [
         ]
     }
 ];
-const customRoutes = getSummaryMenu();
-if (customRoutes && customRoutes.length > 0) {
-    routes = customRoutes;
-}
+
 const router = new VueRouter({
     routes
 });

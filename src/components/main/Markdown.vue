@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-    import {Component, Prop, Vue} from "vue-property-decorator";
+    import {Component, Prop, Vue, Watch} from "vue-property-decorator";
     import Editor from "@/components/main/Editor.vue";
 
     @Component({
@@ -15,11 +15,13 @@
     export default class Markdown extends Vue {
         @Prop({type: String, default: ""})
         readonly fileName!: string;
-        public markdown: string = "";
 
-        handleMarkdownChange(markdown: string) {
-            this.markdown = markdown;
+        @Watch("fileName")
+        public fileNameChange(recv: string, prev: string) {
+            this.loadFiles();
         }
+
+        public markdown: string = "";
 
         onSave(value: string) {
             console.log('save...')
@@ -35,10 +37,12 @@
             console.log('img del ... ' + fileName)
         }
 
-        mounted() {
+        loadFiles() {
             this.markdown = require('../../md/' + this.fileName);
-            // let converter = new showdown.Converter();
-            // this.markdown = converter.makeMarkdown(html);
+        }
+
+        mounted() {
+            this.loadFiles();
         }
     }
 </script>
