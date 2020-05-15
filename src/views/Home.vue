@@ -12,7 +12,7 @@
         components: {Markdown}
     })
     export default class Home extends Vue {
-        public filename: string = "cpu.md";
+        public filename: string = "SUMMARY.md";
     }
 </script>
 

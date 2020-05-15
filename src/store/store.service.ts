@@ -1,5 +1,7 @@
 import {IRouter} from "@/router/router";
 import {IMenuInfo} from "@/components/menu/menu";
+import {summary} from "@/config/config.constant";
+import marked from 'marked';
 
 export const getMenuByRouter = (list: IRouter[]) => {
     const res: IMenuInfo[] = [];
@@ -69,4 +71,15 @@ export const getCacheList = (list: IRouter[]) => {
         }
     });
     return res;
+};
+
+
+export const getSummaryMenu = () => {
+    let routes: IRouter[] = [];
+    const summaryMenu = require('../md/' + summary);
+    const rs=marked(summaryMenu);
+    console.log(summaryMenu);
+    console.log("===================");
+    console.log(rs)
+    return routes;
 };

@@ -7,7 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "showdown": "^1.9.1",
+    "marked": "^1.0.0",
     "view-design": "^4.2.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
@@ -17,7 +17,7 @@
     "vuex-class": "^0.3.2"
   },
   "devDependencies": {
-    "@types/showdown": "^1.9.3",
+    "@types/marked": "^0.7.4",
     "@vue/cli-plugin-router": "~4.3.0",
     "@vue/cli-plugin-typescript": "~4.3.0",
     "@vue/cli-plugin-vuex": "~4.3.0",
@@ -25,7 +25,6 @@
     "html-loader": "^1.1.0",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
-    "markdown-loader": "^5.1.0",
     "mavon-editor": "^2.9.0",
     "typescript": "~3.8.3",
     "vue-template-compiler": "^2.6.11"

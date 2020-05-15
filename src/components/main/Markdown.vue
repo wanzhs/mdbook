@@ -8,7 +8,6 @@
 <script lang="ts">
     import {Component, Prop, Vue} from "vue-property-decorator";
     import Editor from "@/components/main/Editor.vue";
-    import showdown from 'showdown'
 
     @Component({
         components: {Editor}
@@ -24,7 +23,7 @@
 
         onSave(value: string) {
             console.log('save...')
-            
+
         }
 
         onImgAdd(fileName: string, file: File) {
@@ -37,9 +36,9 @@
         }
 
         mounted() {
-            const html = require('../../md/' + this.fileName);
-            let converter = new showdown.Converter();
-            this.markdown = converter.makeMarkdown(html);
+            this.markdown = require('../../md/' + this.fileName);
+            // let converter = new showdown.Converter();
+            // this.markdown = converter.makeMarkdown(html);
         }
     }
 </script>

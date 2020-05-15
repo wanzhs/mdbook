@@ -10,10 +10,11 @@ import Data from "@/views/Data.vue";
 import Love from "@/views/Love.vue";
 import Joy from "@/views/Joy.vue";
 import Peace from "@/views/Peace.vue";
+import {getSummaryMenu} from "@/store/store.service";
 
 Vue.use(VueRouter);
 
-const routes: IRouter[] = [
+let routes: IRouter[] = [
     {
         path: '/',
         redirect: '/home',
@@ -144,7 +145,10 @@ const routes: IRouter[] = [
         ]
     }
 ];
-
+const customRoutes = getSummaryMenu();
+if (customRoutes && customRoutes.length > 0) {
+    routes = customRoutes;
+}
 const router = new VueRouter({
     routes
 });
