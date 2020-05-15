@@ -1,7 +1,7 @@
 <template>
     <mavon-editor :value="markdown"
-                  :subfield="true"
                   :editable="true"
+                  :toolbarsFlag="true"
                   :toolbars="options"
                   @save="onSave"
                   @change="onChange"
@@ -47,12 +47,12 @@
             undo: true,
             redo: true,
             trash: true,
-            save: true,
+            save: false,
             alignleft: true,
             aligncenter: true,
             alignright: true,
             // navigation: true,
-            // subfield: true,
+            // subfield: false,
             // fullscreen: true,
             // readmodel: true,
             // htmlcode: true,
