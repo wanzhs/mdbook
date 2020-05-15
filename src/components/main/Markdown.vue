@@ -1,5 +1,5 @@
 <template>
-    <Editor :markdown="markdown" @markdown="handleMarkdownChange"
+    <Editor v-model="markdown"
             :on-save="onSave"
             :on-img-add="onImgAdd"
             :on-img-del="onImgDel"/>

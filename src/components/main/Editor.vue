@@ -1,5 +1,5 @@
 <template>
-    <mavon-editor v-model="text"
+    <mavon-editor :value="markdown"
                   :subfield="true"
                   :editable="true"
                   :toolbars="options"
@@ -11,13 +11,13 @@
 </template>
 
 <script lang="ts">
-    import {Component, Prop, Vue, Watch} from "vue-property-decorator";
+    import {Component, Model, Prop, Vue, Watch} from "vue-property-decorator";
 
 
     @Component
     export default class Editor extends Vue {
-        @Prop(String)
-        markdown!: string;
+        @Model("markdownChange", {type: String})
+        readonly markdown!: string;
         @Prop(Function) onSave!: (value: string) => void;
         @Prop(Function) onImgAdd!: (fileName: string, file: File) => void;
         @Prop(Function) onImgDel!: (fileName: string) => void;
@@ -61,7 +61,7 @@
         };
 
         public onChange(value: string) {
-            this.$emit("markdown", this.text);
+            this.$emit("markdownChange", value);
         }
     }
 </script>
