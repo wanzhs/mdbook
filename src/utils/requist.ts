@@ -1,6 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
 import {getUserDetail} from "@/components/login/user.service";
 import {IResponseData, IUserDetail} from "@/components/login/user";
+import Vue from "vue";
 
 const request_prefix: string = "/api";
 /**
@@ -18,11 +19,16 @@ axios.interceptors.request.use(config => {
 /**
  * 响应拦截器
  */
-axios.interceptors.response.use((value: AxiosResponse) => {
+axios.interceptors.response.use((value: AxiosResponse<any>) => {
     if (value.status === 200) {
+        if (value.data.code !== 0) {
+            //全局异常捕获提示
+            Vue.prototype.$Message.warning(value.data.message);
+        }
         return value.data;
     }
 }, (error: any) => {
+    Vue.prototype.$Message.warning("网络错误");
     return Promise.reject(error);
 });
 

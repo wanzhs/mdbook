@@ -16,6 +16,6 @@ export const getUserDetail = () => {
 
 export default class UserService {
     public static userLogin = (query: IUserDetail) => {
-        return RequestCarrier.post_json('/account/login', query);
+        return RequestCarrier.post_json('/user/login', query);
     }
 }
