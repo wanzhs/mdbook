@@ -3,7 +3,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://192.168.124.5:8021',
+                target: 'http://test.admin.charge.gapsd.com/api',
                 changeOrigin: true,
                 ws: false,
                 pathRewrite: {

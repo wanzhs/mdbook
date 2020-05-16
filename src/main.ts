@@ -10,7 +10,10 @@ import './assets/css/iview.less'
 import StoreMenuConstant from "@/store/menu.constant";
 import {getBreadCrumbListByName, getCacheList, getMenuByRouter} from "@/store/store.service";
 import {homeName} from "@/config/config.constant";
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
+Vue.use(VueAxios, axios);
 Vue.use(Editor);
 Vue.use(ViewUI);
 Vue.config.productionTip = false;

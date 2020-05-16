@@ -11,6 +11,15 @@ export interface IUserDetail {
 }
 
 /**
+ * 请求结果封装
+ */
+export interface IResponseData {
+    data?: number;
+    message?: string;
+    code?: number;
+}
+
+/**
  * 表单处理类
  */
 export class IForm<T> {

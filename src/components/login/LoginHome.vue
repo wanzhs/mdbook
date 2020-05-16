@@ -19,6 +19,7 @@
     import {IForm, IUserDetail} from "@/components/login/user";
     import ModalV1 from "@/components/common/ModalV1.vue";
     import SubmitOne from "@/components/common/SubmitOne.vue";
+    import UserService from "@/components/login/user.service";
 
     @Component({
         components: {SubmitOne, ModalV1, LoginForm}
@@ -34,9 +35,9 @@
         }
 
         public handleSubmit(query: IUserDetail) {
-            console.log(this.visible)
-            console.log('后台验证用户名密码')
-            console.log(query);
+            UserService.userLogin(query).then(value => {
+                console.log(value);
+            })
         }
     }
 </script>
