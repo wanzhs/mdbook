@@ -1,7 +1,7 @@
 <template>
     <div class="layout">
         <Layout :style="{minHeight: '100vh'}">
-            <Sider ref="side1" collapsible hide-trigger :width="256" :collapsed-width="64" v-model="collapsed">
+            <Sider ref="side1" collapsible hide-trigger :width="256" :collapsed-width="0" v-model="collapsed">
                 <Menu theme="light" width="auto" @on-select="handleMenuItemClick" @on-open-change="handleSubMenuClick">
                     <template v-for="menu in menuList">
                         <SideMenu :menu="menu"/>

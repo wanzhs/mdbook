@@ -13,4 +13,5 @@ export interface IMetaData {
     notCache?: boolean;
     hideInMenu?: boolean;
     hideInBread?: boolean;
+    requireAuth?: boolean;
 }

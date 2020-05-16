@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import About from "@/views/About.vue";
 import MainComponent from '@/components/main/Main.vue'
 import {IRouter} from "@/router/router";
-import {homeName} from "@/config/config.constant";
+import {homeName, loginName} from "@/config/config.constant";
 import Book from "@/views/Book.vue";
 import Data from "@/views/Data.vue";
 import Love from "@/views/Love.vue";
@@ -12,13 +12,16 @@ import Joy from "@/views/Joy.vue";
 import Peace from "@/views/Peace.vue";
 import EditorMain from "@/components/main/EditorMain.vue";
 import EditorHome from "@/views/EditorHome.vue";
+import LoginHome from "@/components/login/LoginHome.vue";
+import {IUserDetail} from "@/components/login/user";
+import {getUserDetail} from "@/components/login/user.service";
 
 Vue.use(VueRouter);
 
 const routes: IRouter[] = [
     {
         path: '/',
-        redirect: '/markdown',
+        redirect: '/home',
         name: '_home',
         component: MainComponent,
         meta: {
@@ -35,8 +38,17 @@ const routes: IRouter[] = [
                     hideInBread: true,
                 },
                 component: Home,
-            }
+            },
         ]
+    },
+    {
+        path: '/login',
+        name: loginName,
+        component: LoginHome,
+        meta: {
+            hideInMenu: true,
+            hideInBread: true
+        }
     },
     {
         path: '/markdown',
@@ -45,6 +57,7 @@ const routes: IRouter[] = [
         meta: {
             title: '富文本编辑器',
             hideInMenu: true,
+            requireAuth: true,
         },
         children: [
             {
@@ -63,6 +76,7 @@ const routes: IRouter[] = [
             title: '关于',
             hideInMenu: false,
             icon: 'md-home',
+            requireAuth: true,
         },
         children: [
             {
@@ -72,6 +86,7 @@ const routes: IRouter[] = [
                 meta: {
                     hideInMenu: true,
                     hideInBread: true,
+                    requireAuth: true,
                 }
             },
             {
@@ -81,6 +96,7 @@ const routes: IRouter[] = [
                 meta: {
                     title: '书籍',
                     hideInMenu: false,
+                    requireAuth: true,
                     icon: 'ios-book',
                 },
                 children: [
@@ -92,6 +108,7 @@ const routes: IRouter[] = [
                             title: '和平',
                             hideInMenu: false,
                             notCache: true,
+                            requireAuth: true,
                         },
                         children: [
                             {
@@ -101,7 +118,8 @@ const routes: IRouter[] = [
                                 meta: {
                                     title: "慈爱",
                                     hideInMenu: false,
-                                    notCache: true
+                                    notCache: true,
+                                    requireAuth: true,
                                 }
                             },
                             {
@@ -111,7 +129,8 @@ const routes: IRouter[] = [
                                 meta: {
                                     title: "愉悦",
                                     hideInMenu: false,
-                                    notCache: true
+                                    notCache: true,
+                                    requireAuth: true,
                                 },
                                 children: [
                                     {
@@ -122,6 +141,7 @@ const routes: IRouter[] = [
                                             title: "良善",
                                             hideInMenu: false,
                                             notCache: false,
+                                            requireAuth: true,
                                         }
                                     }
                                 ]
@@ -136,6 +156,7 @@ const routes: IRouter[] = [
                             title: '仁爱',
                             hideInMenu: false,
                             notCache: true,
+                            requireAuth: true,
                         }
                     },
                     {
@@ -146,6 +167,7 @@ const routes: IRouter[] = [
                             title: '喜乐',
                             hideInMenu: false,
                             notCache: true,
+                            requireAuth: true,
                         }
                     }
                 ]
@@ -157,6 +179,7 @@ const routes: IRouter[] = [
                     title: '数据',
                     hideInMenu: false,
                     icon: 'md-home',
+                    requireAuth: true,
                 }
             },
         ]
@@ -168,6 +191,15 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+    //路由拦截，判断该页面是否需要认证
+    if (to.meta && to.meta.requireAuth) {
+        const userDetail: IUserDetail = getUserDetail();
+        if (!userDetail.userId) {
+            router.push({name: loginName}).then();
+            return;
+        }
+    }
+//实现多级菜单功能
     if (to.matched.length > 2) {
         to.matched.splice(1, to.matched.length - 2);
     }

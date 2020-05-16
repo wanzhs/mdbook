@@ -1,4 +1,17 @@
 module.exports = {
+
+    devServer: {
+        proxy: {
+            '/api': {
+                target: 'http://192.168.124.5:8021',
+                changeOrigin: true,
+                ws: false,
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
+    },
     css: {
         loaderOptions: {
             less: {
