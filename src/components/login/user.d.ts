@@ -25,3 +25,14 @@ export interface IResponseData<T = any> {
 export class IForm<T> {
     handleSubmit: () => void;
 }
+
+export interface IBasePagination {
+    index?: number;
+    size?: number;
+    data?: any;
+}
+
+export interface IPageResult {
+    records?: any;
+    total?: number;
+}

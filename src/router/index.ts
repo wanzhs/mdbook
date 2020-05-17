@@ -15,6 +15,7 @@ import EditorHome from "@/views/EditorHome.vue";
 import LoginHome from "@/components/login/LoginHome.vue";
 import {IUserDetail} from "@/components/login/user";
 import {getUserDetail} from "@/components/login/user.service";
+import BookList from '@/views/book/BookList.vue';
 
 Vue.use(VueRouter);
 
@@ -37,7 +38,7 @@ const routes: IRouter[] = [
                     hideInMenu: true,
                     hideInBread: true,
                 },
-                component: Home,
+                component: BookList,
             },
         ]
     },
@@ -109,44 +110,7 @@ const routes: IRouter[] = [
                             hideInMenu: false,
                             notCache: true,
                             requireAuth: true,
-                        },
-                        children: [
-                            {
-                                path: 'kind',
-                                name: 'kind',
-                                component: Data,
-                                meta: {
-                                    title: "慈爱",
-                                    hideInMenu: false,
-                                    notCache: true,
-                                    requireAuth: true,
-                                }
-                            },
-                            {
-                                path: 'rejoice',
-                                name: 'rejoice',
-                                component: Home,
-                                meta: {
-                                    title: "愉悦",
-                                    hideInMenu: false,
-                                    notCache: true,
-                                    requireAuth: true,
-                                },
-                                children: [
-                                    {
-                                        path: 'goodness',
-                                        name: 'goodness',
-                                        component: Book,
-                                        meta: {
-                                            title: "良善",
-                                            hideInMenu: false,
-                                            notCache: false,
-                                            requireAuth: true,
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
+                        }
                     },
                     {
                         path: 'love',

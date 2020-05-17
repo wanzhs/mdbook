@@ -12,3 +12,17 @@ Mock.mock('/user/login', 'post', {
     accessToken: "AccessTokenAccessTokenAccessTokenAccessToken",
     permissions: ["perm1"],
 });
+
+Mock.mock('/book/list', 'post', {
+    total: 20,
+    "records|10": [
+        {
+            "bookId|+1": 1,
+            "bookName": "@cname",
+            "bookAge|21-25": 23,
+            "bookPress|1": ["南方出版社", "商务出版社"],
+            "bookAuthor|1": "@cname",
+            "bookEditor": "@cname"
+        }
+    ]
+});

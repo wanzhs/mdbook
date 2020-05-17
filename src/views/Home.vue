@@ -1,18 +1,15 @@
 <template>
-    <Markdown :file-name="filename"/>
+
 </template>
 
 <script lang="ts">
 
 
     import {Component, Vue} from "vue-property-decorator";
-    import Markdown from "@/components/main/Markdown.vue";
 
-    @Component({
-        components: {Markdown}
-    })
+    @Component
     export default class Home extends Vue {
-        public filename: string = "SUMMARY.md";
+
     }
 </script>
 

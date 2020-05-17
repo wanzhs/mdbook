@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import App from './App.vue'
 import router, {routes} from './router'
 import store from './store'
+import App from './App.vue';
 import ViewUI from 'view-design'
 import Editor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
@@ -30,5 +30,13 @@ store.commit(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.mutation().Set
 new Vue({
     router,
     store,
-    render: h => h(App)
-}).$mount('#app');
+    render: h => h(App),
+    el: "#app"
+});
+// or
+// new Vue({
+//     router,
+//     store,
+//     el:"#app",
+//     render: h => h(App)
+// });
