@@ -20,6 +20,7 @@
     import ModalV1 from "@/components/common/ModalV1.vue";
     import SubmitOne from "@/components/common/SubmitOne.vue";
     import UserService from "@/components/login/user.service";
+    import {homeName} from "@/config/config.constant";
 
     @Component({
         components: {SubmitOne, ModalV1, LoginForm}
@@ -36,8 +37,11 @@
 
         public handleSubmit(query: IUserDetail) {
             UserService.userLogin(query).then(value => {
-                console.log(value);
-            })
+                if (value.code === 0) {
+                    this.setUserDetail(value.data);
+                    this.$router.push({name: homeName});
+                }
+            });
         }
     }
 </script>

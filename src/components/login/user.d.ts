@@ -13,8 +13,8 @@ export interface IUserDetail {
 /**
  * 请求结果封装
  */
-export interface IResponseData {
-    data?: number;
+export interface IResponseData<T = any> {
+    data?: T;
     message?: string;
     code?: number;
 }

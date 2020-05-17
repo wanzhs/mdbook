@@ -24,9 +24,16 @@ axios.interceptors.request.use(config => {
  */
 axios.interceptors.response.use((value: AxiosResponse<any>) => {
     if (value.status === 200) {
+        if (mockState) {
+            /**
+             * 模拟的数据重新包装成后台固定的格式
+             */
+            const rs: IResponseData = {data: value.data, code: 0, message: ''};
+            value.data = rs;
+        }
+        //全局异常捕获提示
         if (value.data.code !== 0) {
-            //全局异常捕获提示
-            // Vue.prototype.$Message.warning(value.data.message);
+            Vue.prototype.$Message.warning(value.data.message);
         }
         return value.data;
     }
