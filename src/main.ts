@@ -9,9 +9,14 @@ import 'mavon-editor/dist/css/index.css'
 import './assets/css/iview.less'
 import StoreMenuConstant from "@/store/menu.constant";
 import {getBreadCrumbListByName, getCacheList, getMenuByRouter} from "@/store/store.service";
-import {homeName} from "@/config/config.constant";
+import {homeName, mockState} from "@/config/config.constant";
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+
+/**
+ * 根据配置选择是否启用mock模拟数据
+ */
+mockState && require('./mock/mock');
 
 Vue.use(VueAxios, axios);
 Vue.use(Editor);

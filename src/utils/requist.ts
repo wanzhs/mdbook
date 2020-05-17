@@ -2,12 +2,15 @@ import axios, {AxiosResponse} from 'axios';
 import {getUserDetail} from "@/components/login/user.service";
 import {IResponseData, IUserDetail} from "@/components/login/user";
 import Vue from "vue";
+import {mockState} from "@/config/config.constant";
 
-const request_prefix: string = "/api";
 /**
  * 请求拦截器
  */
 axios.interceptors.request.use(config => {
+    if (!mockState) {
+        config.url = "/api" + config.url;
+    }
     const user: IUserDetail = getUserDetail();
     if (user.userAccount) {
         config.headers['Access-Token'] = user.accessToken;
@@ -23,7 +26,7 @@ axios.interceptors.response.use((value: AxiosResponse<any>) => {
     if (value.status === 200) {
         if (value.data.code !== 0) {
             //全局异常捕获提示
-            Vue.prototype.$Message.warning(value.data.message);
+            // Vue.prototype.$Message.warning(value.data.message);
         }
         return value.data;
     }
@@ -51,7 +54,7 @@ window.onerror = (event, source, lineno, colno, error) => {
  */
 export default class RequestCarrier {
     public static post_json = (url: string, data: any) => {
-        return axios.post<IResponseData>(request_prefix + url, data, {
+        return axios.post<IResponseData>(url, data, {
             headers: {
                 "Content-Type": "application/json"
             }
@@ -59,7 +62,7 @@ export default class RequestCarrier {
     };
 
     public static post_formData = (url: string, data: any) => {
-        return axios.post<IResponseData>(request_prefix + url, data, {
+        return axios.post<IResponseData>(url, data, {
             headers: {
                 'Content-Type': "application/x-www-form-urlencoded;charset=utf-8"
             }
@@ -78,6 +81,6 @@ export default class RequestCarrier {
                 url = url + "?" + appendix;
             }
         }
-        return axios.get<IResponseData>(request_prefix + url);
+        return axios.get<IResponseData>(url);
     };
 }
