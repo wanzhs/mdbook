@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import About from "@/views/About.vue";
 import MainComponent from '@/components/main/Main.vue'
 import {IRouter} from "@/router/router";
@@ -16,6 +15,7 @@ import LoginHome from "@/components/login/LoginHome.vue";
 import {IUserDetail} from "@/components/login/user";
 import {getUserDetail} from "@/components/login/user.service";
 import BookList from '@/views/book/BookList.vue';
+import {showThisMenu} from "@/store/store.service";
 
 Vue.use(VueRouter);
 
@@ -144,6 +144,7 @@ const routes: IRouter[] = [
                     hideInMenu: false,
                     icon: 'md-home',
                     requireAuth: true,
+                    access: ['data']
                 }
             },
         ]
@@ -163,6 +164,13 @@ router.beforeEach((to, from, next) => {
             return;
         }
     }
+    //权限拦截
+    const userDetail: IUserDetail = getUserDetail();
+    const perms = (userDetail && userDetail.permissions) || [];
+    if (!showThisMenu(<IRouter>to, perms)) {
+        router.push({name: homeName}).then();
+    }
+
 //实现多级菜单功能
     if (to.matched.length > 2) {
         to.matched.splice(1, to.matched.length - 2);

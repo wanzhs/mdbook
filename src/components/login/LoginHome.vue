@@ -21,6 +21,11 @@
     import SubmitOne from "@/components/common/SubmitOne.vue";
     import UserService from "@/components/login/user.service";
     import {homeName} from "@/config/config.constant";
+    import {Mutation} from "vuex-class";
+    import StoreMenuConstant from "@/store/menu.constant";
+    import {IMenuInfo} from "@/components/menu/menu";
+    import {getMenuByRouter} from "@/store/store.service";
+    import {routes} from "@/router";
 
     @Component({
         components: {SubmitOne, ModalV1, LoginForm}
@@ -30,6 +35,8 @@
         public visible: boolean = true;
         @Ref("formRef")
         public formRef!: IForm<IUserDetail>;
+        @Mutation(`${StoreMenuConstant.moduleName}/${StoreMenuConstant.mutation().SetMenuList}`)
+        setMenuList!: (menuList: IMenuInfo[]) => void;
 
         public handleSubmitClick() {
             this.formRef.handleSubmit();
@@ -38,7 +45,10 @@
         public handleSubmit(query: IUserDetail) {
             UserService.userLogin(query).then(value => {
                 if (value.code === 0) {
-                    this.setUserDetail(value.data);
+                    const userDetail: IUserDetail = value.data;
+                    this.setUserDetail(userDetail);
+                    const menuList: IMenuInfo[] = getMenuByRouter(routes, userDetail.permissions || []);
+                    this.setMenuList(menuList);
                     this.$router.push({name: homeName});
                 }
             });

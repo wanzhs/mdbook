@@ -1,6 +1,8 @@
 import {GetterTree, Module, MutationTree} from "vuex";
 import {IAPPState, IState} from "@/store/store";
 import StoreMenuConstant from "@/store/menu.constant";
+import {getUserDetail} from "@/components/login/user.service";
+import {IUserDetail} from "@/components/login/user";
 import {getMenuByRouter} from "@/store/store.service";
 import {routes} from "@/router";
 
@@ -20,8 +22,14 @@ const getters: GetterTree<IAPPState, IState> = {
         if (state.menuList && state.menuList.length > 0) {
             return state.menuList;
         } else {
-            return getMenuByRouter(routes);
+            const userDetail: IUserDetail = getUserDetail();
+            if (userDetail && userDetail.permissions) {
+                state.menuList = getMenuByRouter(routes, userDetail.permissions)
+            } else {
+                state.menuList = getMenuByRouter(routes, []);
+            }
         }
+        return state.menuList;
     },
     [StoreMenuConstant.getter().GetBreadCrumbList](state, getters1, rootState, rootGetters) {
         return state.breadCrumbList;

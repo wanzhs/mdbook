@@ -10,7 +10,7 @@ Mock.mock('/user/login', 'post', {
     userAccount: "John",
     userPassword: "*******",
     accessToken: "AccessTokenAccessTokenAccessTokenAccessToken",
-    permissions: ["perm1"],
+    permissions: ["data"],
 });
 
 Mock.mock('/book/list', 'post', {
