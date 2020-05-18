@@ -1,6 +1,13 @@
 import {IRouter} from "@/router/router";
 import {IMenuInfo} from "@/components/menu/menu";
+import {browserStorageKey} from "@/config/config.constant";
 
+/**
+ * 删除用户本地存储信息
+ */
+export const removeUserLocalStorage = () => {
+    localStorage.removeItem(browserStorageKey);
+};
 /**
  * 根据访问权限数组获取菜单
  * @param list

@@ -9,9 +9,8 @@
                 </Menu>
             </Sider>
             <Layout>
-                <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}" align="left">
-                    <Icon @click.native="collapsedSider" :style="{margin: '0 -40px'}"
-                          type="md-menu" size="24"></Icon>
+                <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
+                    <HeaderBar :collapsed-sider="collapsedSider"/>
                 </Header>
                 <Content :style="{padding: '0 16px 16px'}">
                     <Breadcrumb :style="{margin: '16px 0'}" align="left">
@@ -39,9 +38,10 @@
     import SideMenu from "@/components/menu/SideMenu.vue";
     import {getBreadCrumbListByName, getRoutePathByName} from "@/store/store.service";
     import {routes} from "@/router";
+    import HeaderBar from "@/components/menu/HeaderBar.vue";
 
     @Component({
-        components: {SideMenu}
+        components: {HeaderBar, SideMenu}
     })
     export default class Main extends Mixins(MenuMixin) {
         public collapsed: boolean = false;
